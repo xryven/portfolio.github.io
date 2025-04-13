@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xRyven</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="xRyven" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <style>
+        :root {
+            --bg-primary: #1e1e1e;
+            --bg-secondary: #2d2d2d;
+            --accent: #0d6efd;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --card-bg: rgba(45, 45, 45, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --success: #28a745;
+            --danger: #dc3545;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        header {
+            backdrop-filter: blur(10px);
+            background-color: rgba(30, 30, 30, 0.8);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #0d6efd, #38b6ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 10px 30px rgba(13, 110, 253, 0.3);
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #0d6efd, #38b6ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .roles {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .role {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 8px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .description {
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .social-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 20px;
+            width: 180px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .social-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .social-username {
+            color: var(--accent);
+            font-size: 14px;
+        }
+
+        .portfolio {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 32px;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(5px);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            background-color: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            overflow: hidden;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .project-tag {
+            background: rgba(13, 110, 253, 0.2);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+
+        .project-links {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .project-link {
+            color: var(--accent);
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
+            background-color: rgba(30, 30, 30, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Admin Panel Styles */
+        .admin-panel {
+            background: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .admin-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .admin-btn:hover {
+            background: #0b5ed7;
+        }
+
+        .admin-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .admin-form input, .admin-form textarea {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid var(--bg-secondary);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .admin-form button {
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .add-project-btn {
+            background: var(--success);
+            color: white;
+        }
+
+        .logout-btn {
+            background: var(--danger);
+            color: white;
+        }
+
+        .project-actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            display: none;
+        }
+
+        .admin-mode .project-actions {
+            display: flex;
+        }
+
+        .edit-btn, .delete-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            color: white;
+        }
+
+        .edit-btn {
+            background: var(--accent);
+        }
+
+        .delete-btn {
+            background: var(--danger);
+        }
+
+        @media (max-width: 768px) {
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .social-card {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .roles {
+                flex-wrap: wrap;
+            }
+            
+            .admin-panel {
+                width: calc(100% - 40px);
+                bottom: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">xRyven</div>
+                <div class="nav-links">
+                    <a href="#">Home</a>
+                    <a href="#portfolio">Projects</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+        </div>
+        <style>
+            .profile-pic {
+                background-image: url('images/profilepicture.png');
+                background-size: cover;
+                background-position: center;
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                margin: 0 auto;
+            }
+        </style>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="profile-pic"></div>
+                <h1>xRyven</h1>
+                <div class="roles">
+                    <div class="role">Web Developer</div>
+                    <div class="role">Designer</div>
+                    <div class="role">Gamer</div>
+                </div>
+                <p class="description">Creative developer passionate about crafting modern experiences through code and design. Gaming enthusiast with an eye for detail.</p>
+                
+                <div class="social-links">
+                    <a href="https://www.youtube.com/@ryvenlol" target="_blank" class="social-card">
+                        <div class="social-icon">📺</div>
+                        <div class="social-name">YouTube</div>
+                        <div class="social-username">@ryvenlol</div>
+                    </a>
+                    <a href="https://www.tiktok.com/@xryven1" target="_blank" class="social-card">
+                        <div class="social-icon">🎵</div>
+                        <div class="social-name">TikTok</div>
+                        <div class="social-username">xryven1</div>
+                    </a>
+                    <a href="https://github.com/xryven" target="_blank" class="social-card">
+                        <div class="social-icon">💻</div>
+                        <div class="social-name">GitHub</div>
+                        <div class="social-username">xryven</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects" id="projects-container">
+                <!-- Projects will be loaded here -->
+            </div>
+            <p style="text-align: center; color: #2d2d2d; padding-top: 4px;">More projects will (probably) come soon.</p>
+        </div>
+    </section>
+    
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div style="text-align: center; margin-bottom: 60px;">
+                <p style="margin-bottom: 20px; color: var(--text-secondary);">Interested in working together? Reach out through my social platforms!</p>
+                <div style="display: flex; justify-content: center; gap: 15px;">
+                    <a href="https://www.youtube.com/@ryvenlol" target="_blank" style="color: var(--accent); text-decoration: none;">YouTube</a>
+                    <a href="https://www.tiktok.com/@xryven1" target="_blank" style="color: var(--accent); text-decoration: none;">TikTok</a>
+                    <a href="https://github.com/xryven" target="_blank" style="color: var(--accent); text-decoration: none;">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 xRyven. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Admin Button -->
+    <button class="admin-btn" id="admin-btn">Admin</button>
+    
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="admin-panel">
+        <div id="login-form">
+            <h3>Admin Login</h3>
+            <div class="admin-form">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="button" id="login-btn">Login</button>
+            </div>
+        </div>
+        <div id="project-form" style="display: none;">
+            <h3>Manage Projects</h3>
+            <div class="admin-form">
+                <input type="text" id="project-title" placeholder="Project Title" required>
+                <textarea id="project-desc" placeholder="Project Description" required></textarea>
+                <input type="text" id="project-tags" placeholder="Tags (comma separated)">
+                <input type="text" id="project-image" placeholder="Image URL">
+                <input type="text" id="project-link" placeholder="Project URL">
+                <button type="button" class="add-project-btn" id="add-project-btn">Add Project</button>
+                <button type="button" class="logout-btn" id="logout-btn">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Projects data with your specific projects
+        let projects = [
+            {
+                id: 1,
+                title: "MS Starterpack",
+                description: "Basic files for the MS stick c plus2",
+                tags: ["Github", "Forked"],
+                image: "images/projects/m5starterpack.png",
+                link: "https://github.com/xryven/m5-starterpack"
+            },
+            {
+                id: 2,
+                title: "HTML Live Preview",
+                description: "Previews a Live HTML Site.",
+                tags: ["HTML", "Live Preview"],
+                image: "images/projects/htmllifepreview.png",
+                link: "https://tourmaline-alpaca-c75f6d.netlify.app/"
+            },
+            {
+                id: 3,
+                title: "Cash Counter (euro)",
+                description: "Count cash by clicking on the Coins/Bills.",
+                tags: ["JavaScript", "Counter"],
+                image: "images/projects/cashcounter.png",
+                link: "https://ryvenscashcounter.netlify.app/"
+            }
+        ];
+
+        // DOM Elements
+        const projectsContainer = document.getElementById('projects-container');
+        const adminBtn = document.getElementById('admin-btn');
+        const adminPanel = document.getElementById('admin-panel');
+        const loginForm = document.getElementById('login-form');
+        const projectForm = document.getElementById('project-form');
+        const loginBtn = document.getElementById('login-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const addProjectBtn = document.getElementById('add-project-btn');
+        
+        // Admin credentials
+        const ADMIN_USERNAME = 'xryven';
+        const ADMIN_PASSWORD = 'admin';
+        
+        // Check if admin is logged in
+        let isAdmin = false;
+        
+        // Render projects
+        function renderProjects() {
+            projectsContainer.innerHTML = '';
+            projects.forEach(project => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card';
+                projectCard.dataset.id = project.id;
+                
+                projectCard.innerHTML = `
+                    <div class="project-img">
+                        ${project.image ? `<img src="${project.image}" alt="${project.title}">` : project.title.charAt(0)}
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-desc">${project.description}</p>
+                        <div class="project-tags">
+                            ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+                        </div>
+                        ${project.link ? `<div class="project-links"><a href="${project.link}" target="_blank" class="project-link">${project.link}</a></div>` : ''}
+                    </div>
+                    <div class="project-actions">
+                        <button class="edit-btn" onclick="editProject(${project.id})">✏️</button>
+                        <button class="delete-btn" onclick="deleteProject(${project.id})">🗑️</button>
+                    </div>
+                `;
+                
+                projectsContainer.appendChild(projectCard);
+            });
+        }
+        
+        // Toggle admin mode
+        function toggleAdminMode() {
+            isAdmin = !isAdmin;
+            if (isAdmin) {
+                document.body.classList.add('admin-mode');
+                adminBtn.textContent = 'Exit Admin';
+            } else {
+                document.body.classList.remove('admin-mode');
+                adminBtn.textContent = 'Admin';
+            }
+        }
+        
+        // Login function
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                isAdmin = true;
+                loginForm.style.display = 'none';
+                projectForm.style.display = 'block';
+                adminPanel.classList.add('active');
+                toggleAdminMode();
+            } else {
+                alert('Invalid credentials!');
+            }
+        }
+        
+        // Logout function
+        function logout() {
+            isAdmin = false;
+            loginForm.style.display = 'block';
+            projectForm.style.display = 'none';
+            adminPanel.classList.remove('active');
+            toggleAdminMode();
+        }
+        
+        // Add new project
+        function addProject() {
+            const title = document.getElementById('project-title').value;
+            const description = document.getElementById('project-desc').value;
+            const tags = document.getElementById('project-tags').value.split(',').map(tag => tag.trim());
+            const image = document.getElementById('project-image').value;
+            const link = document.getElementById('project-link').value;
+            
+            if (!title || !description) {
+                alert('Title and description are required!');
+                return;
+            }
+            
+            const newProject = {
+                id: projects.length > 0 ? Math.max(...projects.map(p => p.id)) + 1 : 1,
+                title,
+                description,
+                tags,
+                image,
+                link
+            };
+            
+            projects.push(newProject);
+            renderProjects();
+            
+            // Clear form
+            document.getElementById('project-title').value = '';
+            document.getElementById('project-desc').value = '';
+            document.getElementById('project-tags').value = '';
+            document.getElementById('project-image').value = '';
+            document.getElementById('project-link').value = '';
+            
+            // Save to localStorage
+            localStorage.setItem('projects', JSON.stringify(projects));
+        }
+        
+        // Edit project
+        function editProject(id) {
+            const project = projects.find(p => p.id === id);
+            if (!project) return;
+            
+            const newTitle = prompt('Enter new title:', project.title);
+            if (newTitle === null) return;
+            
+            const newDesc = prompt('Enter new description:', project.description);
+            if (newDesc === null) return;
+            
+            const newTags = prompt('Enter new tags (comma separated):', project.tags.join(', '));
+            if (newTags === null) return;
+            
+            const newImage = prompt('Enter new image URL:', project.image || '');
+            const newLink = prompt('Enter new project URL:', project.link || '');
+            
+            project.title = newTitle;
+            project.description = newDesc;
+            project.tags = newTags.split(',').map(tag => tag.trim());
+            project.image = newImage || '';
+            project.link = newLink || '';
+            
+            renderProjects();
+            localStorage.setItem('projects', JSON.stringify(projects));
+        }
+        
+        // Delete project
+        function deleteProject(id) {
+            if (confirm('Are you sure you want to delete this project?')) {
+                projects = projects.filter(p => p.id !== id);
+                renderProjects();
+                localStorage.setItem('projects', JSON.stringify(projects));
+            }
+        }
+        
+        // Event Listeners
+        adminBtn.addEventListener('click', () => {
+            adminPanel.classList.toggle('active');
+            if (!isAdmin) {
+                projectForm.style.display = 'none';
+                loginForm.style.display = 'block';
+            }
+        });
+        
+        loginBtn.addEventListener('click', login);
+        logoutBtn.addEventListener('click', logout);
+        addProjectBtn.addEventListener('click', addProject);
+        
+        // Load projects from localStorage if available
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedProjects = localStorage.getItem('projects');
+            if (savedProjects) {
+                projects = JSON.parse(savedProjects);
+            }
+            renderProjects();
+        });
+    </script>
+</body>
+</html>
